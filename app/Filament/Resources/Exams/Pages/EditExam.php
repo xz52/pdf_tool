@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Filament\Resources\Exams\Pages;
+
+use App\Filament\Resources\Exams\ExamResource;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ViewAction;
+use Filament\Resources\Pages\EditRecord;
+
+class EditExam extends EditRecord
+{
+    protected static string $resource = ExamResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            ViewAction::make()
+                ->visible(fn() => hexa()->can('exam.view')),
+            DeleteAction::make()
+                ->visible(fn() => hexa()->can('exam.delete')),
+        ];
+    }
+    
+}

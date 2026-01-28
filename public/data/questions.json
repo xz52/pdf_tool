@@ -1,0 +1,600 @@
+[
+  {
+    "id": "6-1",
+    "question": "What causes variations in altimeter settings between weather reporting points?",
+    "options": {
+      "A": "Unequal heating of the Earth's surface.",
+      "B": "Variation of terrain elevation.",
+      "C": "Coriolis force.",
+      "D": "Seasonal changes in humidity."
+    },
+    "correct_answer": "A",
+    "explanation": "Temperature changes cause variations in air pressure and density. Unequal heating of the Earth's surface leads to different altimeter settings."
+  },
+  {
+    "id": "6-2",
+    "question": "The wind at 5,000 feet AGL is southwesterly while the surface wind is southerly. This difference in direction is primarily due to",
+    "options": {
+      "A": "Stronger pressure gradient at higher altitudes.",
+      "B": "Friction between the wind and the surface.",
+      "C": "Stronger Coriolis force at the surface.",
+      "D": "Temperature inversion effects."
+    },
+    "correct_answer": "B",
+    "explanation": "Above 2,000 feet AGL, wind flows along isobars. Below that altitude, friction with the earth's surface deflects the wind."
+  },
+  {
+    "id": "6-3",
+    "question": "Convective circulation patterns associated with sea breezes are caused by",
+    "options": {
+      "A": "Warm, dense air moving inland from over the water.",
+      "B": "Water absorbing and radiating heat faster than the land.",
+      "C": "Cool, dense air moving inland from over the water.",
+      "D": "Rapid cooling of land surfaces at night."
+    },
+    "correct_answer": "C",
+    "explanation": "During the day, land surfaces warm faster than water. Rising warm air over land is replaced by cooler, denser air moving inland from over the water."
+  },
+  {
+    "id": "6-4",
+    "question": "How will frost on the wings of an airplane affect takeoff performance?",
+    "options": {
+      "A": "Frost will disrupt the smooth flow of air over the wing, adversely affecting its lifting capability.",
+      "B": "Frost will change the camber of the wing, increasing its lifting capability.",
+      "C": "Frost will cause the airplane to become airborne with a higher angle of attack, decreasing the stall speed.",
+      "D": "Frost will reduce drag and increase climb rate."
+    },
+    "correct_answer": "A",
+    "explanation": "Frost disrupts the smooth airflow over the wing and can cause early separation of the airflow, resulting in a loss of lift."
+  },
+  {
+    "id": "6-5",
+    "question": "Every physical process of weather is accompanied by, or is the result of a",
+    "options": {
+      "A": "Movement of air.",
+      "B": "Pressure differential.",
+      "C": "Heat exchange.",
+      "D": "Magnetic variation."
+    },
+    "correct_answer": "C",
+    "explanation": "Processes like heating, cooling, evaporation, and condensation are caused by heat exchange."
+  },
+  {
+    "id": "6-6",
+    "question": "A temperature inversion would most likely result in which weather condition?",
+    "options": {
+      "A": "Clouds with extensive vertical development above an inversion aloft.",
+      "B": "Good visibility in the lower levels of the atmosphere and poor visibility above an inversion aloft.",
+      "C": "An increase in temperature as altitude is increased.",
+      "D": "Sudden thunderstorms at lower levels."
+    },
+    "correct_answer": "C",
+    "explanation": "During an inversion, cooler air is trapped beneath a warmer layer of air. Therefore, temperature increases with altitude."
+  },
+  {
+    "id": "6-7",
+    "question": "The most frequent type of ground or surface-based temperature inversion is that which is produced by",
+    "options": {
+      "A": "Terrestrial radiation on a clear, relatively still night.",
+      "B": "Warm air being lifted rapidly aloft in the vicinity of mountainous terrain.",
+      "C": "The movement of colder air under warm air, or the movement of warm air over cold air.",
+      "D": "Rapid cooling during thunderstorms."
+    },
+    "correct_answer": "A",
+    "explanation": "An inversion commonly forms on clear, cool nights when the ground radiates heat and cools faster than the overlying air."
+  },
+  {
+    "id": "6-8",
+    "question": "Which weather conditions should be expected beneath a low-level temperature inversion layer when the relative humidity is high?",
+    "options": {
+      "A": "Smooth air, poor visibility, fog, haze, or low clouds.",
+      "B": "Light wind shear, poor visibility, haze, and light rain.",
+      "C": "Turbulent air, poor visibility, fog, low stratus type clouds, and showery precipitation.",
+      "D": "Clear skies and strong winds."
+    },
+    "correct_answer": "A",
+    "explanation": "Low-level temperature inversions normally occur in stable, smooth air, with poor visibility due to trapped pollutants. High humidity tends to cause fog and low clouds."
+  },
+  {
+    "id": "6-9",
+    "question": "What is meant by the term 'dewpoint'?",
+    "options": {
+      "A": "The temperature at which condensation and evaporation are equal.",
+      "B": "The temperature at which dew will always form.",
+      "C": "The temperature to which air must be cooled to become saturated.",
+      "D": "The temperature at which fog dissipates."
+    },
+    "correct_answer": "C",
+    "explanation": "When air is cooled to its dewpoint, it can hold no more moisture, and is said to be saturated."
+  },
+  {
+    "id": "6-10",
+    "question": "The amount of water vapor which air can hold depends on the",
+    "options": {
+      "A": "Dewpoint.",
+      "B": "Air temperature.",
+      "C": "Stability of the air.",
+      "D": "Altitude."
+    },
+    "correct_answer": "B",
+    "explanation": "The amount of moisture in the air primarily depends on the temperature. Warm air can hold more moisture than cool air."
+  },
+  {
+    "id": "6-11",
+    "question": "Clouds, fog, or dew will always form when",
+    "options": {
+      "A": "Water vapor condenses.",
+      "B": "Water vapor is present.",
+      "C": "Relative humidity reaches 100 percent.",
+      "D": "Air temperature rises suddenly."
+    },
+    "correct_answer": "A",
+    "explanation": "Condensation occurs when water vapor changes to liquid form, producing clouds, fog, or dew."
+  },
+  {
+    "id": "6-12",
+    "question": "What are the processes by which moisture is added to unsaturated air?",
+    "options": {
+      "A": "Evaporation and sublimation.",
+      "B": "Heating and condensation.",
+      "C": "Supersaturation and evaporation.",
+      "D": "Melting and freezing."
+    },
+    "correct_answer": "A",
+    "explanation": "Evaporation changes liquid water to vapor, sublimation changes ice directly to vapor."
+  },
+  {
+    "id": "6-13",
+    "question": "Which conditions result in the formation of frost?",
+    "options": {
+      "A": "Surface temperature at or below freezing when droplets fall.",
+      "B": "Surface temperature at or below dewpoint, and dewpoint below freezing.",
+      "C": "Air temperature at or below freezing when droplets fall.",
+      "D": "Rapid warming of moist air."
+    },
+    "correct_answer": "B",
+    "explanation": "When dewpoint is below freezing and the surface is at or below dewpoint, vapor sublimates into frost."
+  },
+  {
+    "id": "6-14",
+    "question": "The presence of ice pellets at the surface is evidence that there",
+    "options": {
+      "A": "Are thunderstorms in the area.",
+      "B": "Has been cold frontal passage.",
+      "C": "Is a temperature inversion with freezing rain aloft.",
+      "D": "Is strong surface wind shear."
+    },
+    "correct_answer": "C",
+    "explanation": "Ice pellets indicate freezing rain aloft due to a warm layer above cold air."
+  },
+  {
+    "id": "6-15",
+    "question": "What measurement can be used to determine the stability of the atmosphere?",
+    "options": {
+      "A": "Atmospheric pressure.",
+      "B": "Actual lapse rate.",
+      "C": "Surface temperature.",
+      "D": "Relative humidity."
+    },
+    "correct_answer": "B",
+    "explanation": "Atmospheric stability is determined by the actual lapse rate (temperature decrease with altitude)."
+  },
+  {
+    "id": "6-16",
+    "question": "What would decrease the stability of an air mass?",
+    "options": {
+      "A": "Warming from below.",
+      "B": "Cooling from below.",
+      "C": "Decrease in water vapor.",
+      "D": "Increase in pressure aloft."
+    },
+    "correct_answer": "A",
+    "explanation": "Warming from below increases lapse rate, making air less stable."
+  },
+  {
+    "id": "6-17",
+    "question": "What is a characteristic of stable air?",
+    "options": {
+      "A": "Stratiform clouds.",
+      "B": "Unlimited visibility.",
+      "C": "Cumulus clouds.",
+      "D": "Frequent thunderstorms."
+    },
+    "correct_answer": "A",
+    "explanation": "Stable air produces stratiform clouds and poor visibility."
+  },
+  {
+    "id": "6-18",
+    "question": "Moist, stable air flowing upslope can be expected to",
+    "options": {
+      "A": "Produce stratus type clouds.",
+      "B": "Cause showers and thunderstorms.",
+      "C": "Develop convective turbulence.",
+      "D": "Increase surface winds."
+    },
+    "correct_answer": "A",
+    "explanation": "Moist stable air flowing upslope cools to saturation, forming stratus clouds."
+  },
+  {
+    "id": "6-19",
+    "question": "If an unstable air mass is forced upward, what type clouds can be expected?",
+    "options": {
+      "A": "Stratus clouds with little vertical development.",
+      "B": "Stratus clouds with considerable associated turbulence.",
+      "C": "Clouds with considerable vertical development and associated turbulence.",
+      "D": "Thin cirrus clouds."
+    },
+    "correct_answer": "C",
+    "explanation": "Unstable air lifted upward produces cumuliform clouds with extensive vertical development and turbulence."
+  },
+  {
+    "id": "6-20",
+    "question": "What feature is associated with a temperature inversion?",
+    "options": {
+      "A": "A stable layer of air.",
+      "B": "An unstable layer of air.",
+      "C": "Chinook winds on mountain slopes.",
+      "D": "Strong convective currents."
+    },
+    "correct_answer": "A",
+    "explanation": "Temperature inversions occur in stable air, with cooler air trapped beneath warmer air."
+  },
+  {
+    "id": "6-21",
+    "question": "What is the approximate base of the cumulus clouds if the surface air temperature at 1,000 feet MSL is 70°F and the dewpoint is 48ºF?",
+    "options": {
+      "A": "4,000 feet MSL.",
+      "B": "5,000 feet MSL.",
+      "C": "6,000 feet MSL.",
+      "D": "7,000 feet MSL."
+    },
+    "correct_answer": "C",
+    "explanation": "Cloud base ≈ (Temp - Dewpoint)/4.5 × 1000 + surface elevation. Here ≈ 6,000 ft MSL."
+  },
+  {
+    "id": "6-22",
+    "question": "At approximately what altitude above the surface would the pilot expect the base of cumuliform clouds if the surface air temperature is 82°F and the dewpoint is 38ºF?",
+    "options": {
+      "A": "9,000 feet AGL.",
+      "B": "10,000 feet AGL.",
+      "C": "11,000 feet AGL.",
+      "D": "12,000 feet AGL."
+    },
+    "correct_answer": "B",
+    "explanation": "Cloud base estimated using lapse rate 4.5°F/1000 ft and temp/dewpoint spread."
+  },
+  {
+    "id": "6-23",
+    "question": "What are characteristics of a moist, unstable air mass?",
+    "options": {
+      "A": "Cumuliform clouds and showery precipitation.",
+      "B": "Poor visibility and smooth air.",
+      "C": "Stratiform clouds and showery precipitation.",
+      "D": "Thin cirrus clouds and calm winds."
+    },
+    "correct_answer": "A",
+    "explanation": "Moist unstable air produces cumuliform clouds and showery precipitation."
+  },
+  {
+    "id": "6-24",
+    "question": "What are characteristics of unstable air?",
+    "options": {
+      "A": "Turbulence and good surface visibility.",
+      "B": "Turbulence and poor surface visibility.",
+      "C": "Nimbostratus clouds and good surface visibility.",
+      "D": "Smooth air and haze."
+    },
+    "correct_answer": "A",
+    "explanation": "Unstable air produces turbulence and good visibility since pollutants are not trapped."
+  },
+  {
+    "id": "6-25",
+    "question": "A stable air mass is most likely to have which characteristic?",
+    "options": {
+      "A": "Showery precipitation.",
+      "B": "Turbulent air.",
+      "C": "Smooth air.",
+      "D": "Towering cumulus clouds."
+    },
+    "correct_answer": "C",
+    "explanation": "Stable air resists vertical motion, producing smooth conditions."
+  },
+  {
+    "id": "6-26",
+    "question": "The suffix 'nimbus,' used in naming clouds, means",
+    "options": {
+      "A": "A cloud with extensive vertical development.",
+      "B": "A rain cloud.",
+      "C": "A middle cloud containing ice pellets.",
+      "D": "A high cirrus cloud."
+    },
+    "correct_answer": "B",
+    "explanation": "Nimbus is Latin for rain cloud, used in cumulonimbus or nimbostratus."
+  },
+  {
+    "id": "6-27",
+    "question": "Clouds are divided into four families according to their",
+    "options": {
+      "A": "Outward shape.",
+      "B": "Height range.",
+      "C": "Composition.",
+      "D": "Color."
+    },
+    "correct_answer": "B",
+    "explanation": "Clouds are grouped by families according to their altitudes: low, middle, high, and vertical development."
+  },
+  {
+    "id": "6-28",
+    "question": "The boundary between two different air masses is referred to as a",
+    "options": {
+      "A": "Frontolysis.",
+      "B": "Frontogenesis.",
+      "C": "Front.",
+      "D": "Isotherm."
+    },
+    "correct_answer": "C",
+    "explanation": "The boundary area where two air masses of different properties meet is called a front."
+  },
+  {
+    "id": "6-29",
+    "question": "One of the most easily recognized discontinuities across a front is",
+    "options": {
+      "A": "A change in temperature.",
+      "B": "An increase in cloud coverage.",
+      "C": "An increase in relative humidity.",
+      "D": "A sudden drop in pressure."
+    },
+    "correct_answer": "A",
+    "explanation": "Since a front is the boundary between air masses of differing temperatures, a change in temperature is the easiest way to recognize frontal passage."
+  },
+  {
+    "id": "6-30",
+    "question": "One weather phenomenon which will always occur when flying across a front is a change in the",
+    "options": {
+      "A": "Wind direction.",
+      "B": "Type of precipitation.",
+      "C": "Stability of the air mass.",
+      "D": "Visibility."
+    },
+    "correct_answer": "A",
+    "explanation": "A shift in wind direction always occurs across a front."
+  },
+  {
+    "id": "6-31",
+    "question": "Steady precipitation preceding a front is an indication of",
+    "options": {
+      "A": "Stratiform clouds with moderate turbulence.",
+      "B": "Cumuliform clouds with little or no turbulence.",
+      "C": "Stratiform clouds with little or no turbulence.",
+      "D": "Towering cumulus clouds with hail."
+    },
+    "correct_answer": "C",
+    "explanation": "Steady precipitation, stratiform clouds, and little or no turbulence are all typical of stable air."
+  },
+  {
+    "id": "6-32",
+    "question": "What situation is most conducive to the formation of radiation fog?",
+    "options": {
+      "A": "Warm, moist air over low, flatland areas on clear, calm nights.",
+      "B": "Moist, tropical air moving over cold, offshore water.",
+      "C": "The movement of cold air over much warmer water.",
+      "D": "Strong winds over mountainous terrain."
+    },
+    "correct_answer": "A",
+    "explanation": "On clear, calm nights in flat areas, radiation fog forms when moist air cools to its dewpoint."
+  },
+  {
+    "id": "6-33",
+    "question": "If the temperature/dewpoint spread is small and decreasing, and the temperature is 62ºF, what type weather is most likely to develop?",
+    "options": {
+      "A": "Freezing precipitation.",
+      "B": "Thunderstorms.",
+      "C": "Fog or low clouds.",
+      "D": "Strong winds."
+    },
+    "correct_answer": "C",
+    "explanation": "When the temperature/dewpoint spread decreases to zero, condensation occurs, forming fog or low clouds."
+  },
+  {
+    "id": "6-34",
+    "question": "In which situation is advection fog most likely to form?",
+    "options": {
+      "A": "A warm, moist air mass on the windward side of mountains.",
+      "B": "An air mass moving inland from the coast in winter.",
+      "C": "A light breeze blowing colder air out to sea.",
+      "D": "Rapid cooling after sunset."
+    },
+    "correct_answer": "B",
+    "explanation": "When warmer air moves inland, advection fog is likely to form."
+  },
+  {
+    "id": "6-35",
+    "question": "What types of fog depend upon wind in order to exist?",
+    "options": {
+      "A": "Radiation fog and ice fog.",
+      "B": "Steam fog and ground fog.",
+      "C": "Advection fog and upslope fog.",
+      "D": "Valley fog and freezing fog."
+    }
+  },
+  {
+    "id": "6-36",
+    "question": "Low-level turbulence can occur and icing can become hazardous in which type of fog?",
+    "options": {
+      "A": "Rain-induced fog.",
+      "B": "Upslope fog.",
+      "C": "Steam fog.",
+      "D": "Radiation fog."
+    },
+    "correct_answer": "C",
+    "explanation": "Steam fog forms when cold air moves over warmer water. Rising vapor can freeze, causing icing and turbulence."
+  },
+  {
+    "id": "6-37",
+    "question": "An almond or lens-shaped cloud which appears stationary, but may contain winds of 50 knots or more, is referred to as",
+    "options": {
+      "A": "An inactive frontal cloud.",
+      "B": "A funnel cloud.",
+      "C": "A lenticular cloud.",
+      "D": "A roll cloud."
+    },
+    "correct_answer": "C",
+    "explanation": "Lenticular clouds form at the crests of mountain waves and may contain strong winds."
+  },
+  {
+    "id": "6-38",
+    "question": "Crests of standing mountain waves may be marked by stationary, lens-shaped clouds known as",
+    "options": {
+      "A": "Mammatocumulus clouds.",
+      "B": "Standing lenticular clouds.",
+      "C": "Roll clouds.",
+      "D": "Cirrus clouds."
+    },
+    "correct_answer": "B",
+    "explanation": "Standing lenticular clouds mark the crests of mountain waves."
+  },
+  {
+    "id": "6-39",
+    "question": "What clouds have the greatest turbulence?",
+    "options": {
+      "A": "Towering cumulus.",
+      "B": "Cumulonimbus.",
+      "C": "Nimbostratus.",
+      "D": "Cirrus."
+    },
+    "correct_answer": "B",
+    "explanation": "Cumulonimbus clouds form thunderstorms and tornadoes, producing the most severe turbulence."
+  },
+  {
+    "id": "6-40",
+    "question": "What cloud types would indicate convective turbulence?",
+    "options": {
+      "A": "Cirrus clouds.",
+      "B": "Nimbostratus clouds.",
+      "C": "Towering cumulus clouds.",
+      "D": "Stratus clouds."
+    },
+    "correct_answer": "C",
+    "explanation": "Towering cumulus clouds are formed by rising heated air currents, causing convective turbulence."
+  },
+  {
+    "id": "6-41",
+    "question": "Possible mountain wave turbulence could be anticipated when winds of 40 knots or greater blow",
+    "options": {
+      "A": "Across a mountain ridge, and the air is stable.",
+      "B": "Down a mountain valley, and the air is unstable.",
+      "C": "Parallel to a mountain peak, and the air is stable.",
+      "D": "Over flat terrain with unstable air."
+    },
+    "correct_answer": "A",
+    "explanation": "Mountain waves form when strong winds flow across a ridge in stable air."
+  },
+  {
+    "id": "6-42",
+    "question": "Where does wind shear occur?",
+    "options": {
+      "A": "Only at higher altitudes.",
+      "B": "Only at lower altitudes.",
+      "C": "At all altitudes, in all directions.",
+      "D": "Only near the poles."
+    },
+    "correct_answer": "C",
+    "explanation": "Wind shear can occur at all altitudes, both vertical and horizontal."
+  },
+  {
+    "id": "6-43",
+    "question": "When may hazardous wind shear be expected?",
+    "options": {
+      "A": "When stable air crosses a mountain barrier forming lenticular clouds.",
+      "B": "In areas of low-level temperature inversion, frontal zones, and clear air turbulence.",
+      "C": "Following frontal passage when stratocumulus clouds form.",
+      "D": "During calm nights with no wind."
+    },
+    "correct_answer": "B",
+    "explanation": "Wind shear is common above temperature inversions, in frontal zones, and with clear air turbulence."
+  },
+  {
+    "id": "6-44",
+    "question": "A pilot can expect a wind-shear zone in a temperature inversion whenever the windspeed at 2,000 to 4,000 feet above the surface is at least",
+    "options": {
+      "A": "10 knots.",
+      "B": "15 knots.",
+      "C": "25 knots.",
+      "D": "35 knots."
+    },
+    "correct_answer": "C",
+    "explanation": "A shear zone forms if winds at 2,000–4,000 feet are 25 knots or more above a calm surface."
+  },
+  {
+    "id": "6-45",
+    "question": "One in-flight condition necessary for structural icing to form is",
+    "options": {
+      "A": "Small temperature/dewpoint spread.",
+      "B": "Stratiform clouds.",
+      "C": "Visible moisture.",
+      "D": "High altitude."
+    },
+    "correct_answer": "C",
+    "explanation": "Structural icing requires visible moisture and aircraft surface temperatures at or below freezing."
+  },
+  {
+    "id": "6-46",
+    "question": "In which environment is aircraft structural ice most likely to have the highest accumulation rate?",
+    "options": {
+      "A": "Cumulus clouds with below freezing temperatures.",
+      "B": "Freezing drizzle.",
+      "C": "Freezing rain.",
+      "D": "Snow showers."
+    },
+    "correct_answer": "C",
+    "explanation": "Freezing rain produces the highest rate of ice accumulation."
+  },
+  {
+    "id": "6-47",
+    "question": "Why is frost considered hazardous to flight?",
+    "options": {
+      "A": "Frost changes the basic aerodynamic shape of the airfoils, thereby decreasing lift.",
+      "B": "Frost slows the airflow over the airfoils, thereby increasing control effectiveness.",
+      "C": "Frost spoils the smooth flow of air over the wings, thereby decreasing lifting capability.",
+      "D": "Frost increases drag but improves stability."
+    },
+    "correct_answer": "C",
+    "explanation": "Frost disrupts smooth airflow over the wing, causing early separation and loss of lift."
+  },
+  {
+    "id": "6-48",
+    "question": "How does frost affect the lifting surfaces of an airplane on takeoff?",
+    "options": {
+      "A": "Frost may prevent the airplane from becoming airborne at normal takeoff speed.",
+      "B": "Frost will change the camber of the wing, increasing lift during takeoff.",
+      "C": "Frost may cause the airplane to become airborne with a lower angle of attack at a lower indicated airspeed.",
+      "D": "Frost reduces drag and increases climb rate."
+    },
+    "correct_answer": "A",
+    "explanation": "Frost can prevent an airplane from becoming airborne at normal takeoff speed."
+  },
+  {
+    "id": "6-49",
+    "question": "The conditions necessary for the formation of cumulonimbus clouds are a lifting action and",
+    "options": {
+      "A": "Unstable air containing an excess of condensation nuclei.",
+      "B": "Unstable, moist air.",
+      "C": "Either stable or unstable air.",
+      "D": "Dry stable air."
+    },
+    "correct_answer": "B",
+    "explanation": "Cumulonimbus clouds require lifting action, instability, and moisture."
+  },
+  {
+    "id": "6-50",
+    "question": "What feature is normally associated with the cumulus stage of a thunderstorm?",
+    "options": {
+      "A": "Roll cloud.",
+      "B": "Continuous updraft.",
+      "C": "Frequent lightning.",
+      "D": "Heavy rain."
+    },
+    "correct_answer": "B",
+    "explanation": "In the cumulus stage, continuous updrafts cause the cloud to build upwards."
+  }
+]
