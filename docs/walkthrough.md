@@ -6,22 +6,22 @@ Successfully fixed and imported all questions from the 3 PPL Test Guide DOCX fil
 
 ## Import Results
 
-### Stage 1 (PPL TEST GUIDE STAGE 1.docx)
--  **1,972 questions** imported
+### STAGE 1 (PPL TEST GUIDE STAGE 1.docx)
+-  **1,994 questions** imported
 - Subject: `STAGE 1` (ID: 1)
-- Format: Block Mode (cell-based questions)
+- Format: Block Mode
 
-### Stage 2 (PPL TEST GUIDE STAGE 2.docx)
-- **276 questions** imported (Split from 69 concept rows × 4 questions each)
+### STAGE 2 (PPL TEST GUIDE STAGE 2.docx)
+- **273 questions** imported (Split from 69 concept rows)
 - Subject: `STAGE 2` (ID: 2)
-- Format: Grid Mode (multiple questions per row)
+- Format: Grid Mode
 
-### Stage 3 (ppl test guide stage 3.docx)
-- **603 questions** imported  
+### STAGE 3 (ppl test guide stage 3.docx)
+- **600 questions** imported  
 - Subject: `STAGE 3` (ID: 3)
 - Format: Mixed (Block + Grid)
 
-**Total: 2,851 questions successfully imported**
+**Total: 2,867 questions successfully imported**
 
 ## Issues Fixed
 

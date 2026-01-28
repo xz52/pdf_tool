@@ -12,7 +12,7 @@ use Filament\Forms\Get;
 
 class GlobalQuestionForm
 {
-    public static function configure(\Filament\Forms\Form $form): \Filament\Forms\Form
+    public static function configure(\Filament\Schemas\Schema $form): \Filament\Schemas\Schema
     {
         return $form
             ->schema([

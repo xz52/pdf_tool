@@ -15,7 +15,6 @@ class DocxParserService
             throw new \Exception("File not found: {$filePath}");
         }
 
-        // Manual autoloader workaround
         if (!class_exists('PhpOffice\PhpWord\Autoloader')) {
             require_once base_path('vendor/phpoffice/phpword/src/PhpWord/Autoloader.php');
             \PhpOffice\PhpWord\Autoloader::register();
@@ -43,7 +42,6 @@ class DocxParserService
 
             $firstCellData = self::extractCellData($cells[0]);
             
-            // Pattern for Stage 2/3 IDs like "6-1" or "8-4"
             if (preg_match('/^\d+[\.-]\d+$/', trim($firstCellData['text'])) && count($cells) >= 3) {
                 $parsedRowQuestions = self::parseGridRow($cells);
                 foreach ($parsedRowQuestions as $q) {
@@ -76,7 +74,7 @@ class DocxParserService
         // T/F
         for ($i = 2; $i < count($cells) && $i < 5; $i++) {
             $varData = self::extractCellData($cells[$i]);
-            $text = $varData['text'];
+            $text = self::stripHtmlArtifacts($varData['text']);
             
             if (stripos($text, 'True') !== false && stripos($text, 'False') !== false) {
                 $tf = self::parseTrueFalseFromCell($varData);
@@ -101,7 +99,7 @@ class DocxParserService
         $correctOption = 0; 
         $foundExplicitBold = false;
         foreach ($boldRanges as $range) {
-            $boldWord = trim(strtolower($range['text']));
+            $boldWord = trim(strtolower(self::stripHtmlArtifacts($range['text'])));
             if ($boldWord === 'true' || $boldWord === 'yes') {
                 $correctOption = 0;
                 $foundExplicitBold = true;
@@ -114,6 +112,7 @@ class DocxParserService
         }
 
         if (!$foundExplicitBold) {
+             // If any part of the cell is bold, assume it's the correct variation (True)
              $correctOption = empty($boldRanges) ? 1 : 0;
         }
 
@@ -128,15 +127,15 @@ class DocxParserService
 
     private static function cleanQuestionText(string $text): string
     {
-        // Aggressive HTML cleaning
         $text = self::stripHtmlArtifacts($text);
         
-        $text = preg_replace('/True\s*False$/i', '', $text);
+        // Remove common artifacts from heading
+        $text = str_ireplace(['TrueFalse', 'True False'], '', $text);
+        
         $text = preg_replace('/^Edit\s+/i', '', $text);
         $text = preg_replace('/^Variation\s+\d+[:\s]*/i', '', $text);
         $text = preg_replace('/^(?:Question\s+)?\d+(?:[\.-]\d+)?[\.:\)]\s*/i', '', $text);
         
-        // Remove option letters dangling at the end
         $text = preg_replace('/\s*[A-D][\.\)]\s*$/s', '', $text);
         
         $text = preg_replace('/\s+/', ' ', $text);
@@ -154,11 +153,9 @@ class DocxParserService
 
     private static function stripHtmlArtifacts(string $text): string
     {
-        // Handle common entity patterns
-        $text = str_ireplace(['&lt;u&gt;', '&lt;/u&gt;', '&lt;b&gt;', '&lt;/b&gt;', '&lt;i&gt;', '&lt;/i&gt;'], '', $text);
+        $text = str_ireplace(['&lt;u&gt;', '&lt;/u&gt;', '&lt;b&gt;', '&lt;/b&gt;', '&lt;i&gt;', '&lt;/i&gt;', '<u>', '</u>', '<b>', '</b>', '<i>', '</i>'], '', $text);
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         $text = strip_tags($text);
-        // Second pass for nested entities
         $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         return $text;
     }
@@ -210,17 +207,15 @@ class DocxParserService
         $rawText = $cellData['text'];
         $boldRanges = $cellData['bold_ranges'];
 
-        // Clean HTML before splitting but preserve markers
         $tempText = self::stripHtmlArtifacts($rawText);
         
-        // Find option markers and force new lines
-        // Patterns: A. B) C. or even <u>B.</u>
-        // We look for [A-D] followed by . or )
+        // Ensure markers have newlines for easier splitting
         $textWithNewlines = preg_replace('/([A-D][\.\)])/', "\n$1", $tempText);
         $lines = explode("\n", $textWithNewlines);
         
         $questionLines = [];
         $options = [];
+        // Improved T/F detection: must have both words and NO option markers
         $isTrueFalse = (stripos($tempText, 'True') !== false && stripos($tempText, 'False') !== false) && !preg_match('/[A-D][\.\)]/', $tempText);
         
         $parsingOptions = false;
@@ -230,6 +225,7 @@ class DocxParserService
 
             if (preg_match('/^([A-D])[)\.\s]+(.+)/', $line, $matches)) {
                 $parsingOptions = true;
+                $isTrueFalse = false;
                 $options[] = ['text' => $matches[2], 'letter' => $matches[1]];
             } elseif ($isTrueFalse && (stripos($line, 'True') === 0 || stripos($line, 'False') === 0)) {
                 $parsingOptions = true;
@@ -257,15 +253,12 @@ class DocxParserService
                 $rangeClean = trim(self::stripHtmlArtifacts($range['text']));
                 if (empty($rangeClean)) continue;
                 
-                // Strict check: if the bold text starts with the correct letter (e.g. "B.")
                 if ($letter && preg_match('/^' . $letter . '[\.\)\s]/i', $rangeClean)) {
                     $correctIndex = $index;
                     break 2;
                 }
                 
-                // Content check: if the bold text is exactly the option text (or contains it)
                 if (strlen($optClean) > 3 && (strpos($rangeClean, $optClean) !== false || strpos($optClean, $rangeClean) !== false)) {
-                     // Ensure it's not the question text
                      if (stripos($questionText, $rangeClean) !== false && strlen($rangeClean) > 15) continue;
                      
                      $correctIndex = $index;
