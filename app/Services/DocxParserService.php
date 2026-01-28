@@ -41,10 +41,9 @@ class DocxParserService
             $cells = $row->getCells();
             if (count($cells) < 2) continue;
 
-            // Strategy 1: Grid Mode (Row = Multiple Questions)
             $firstCellData = self::extractCellData($cells[0]);
             
-            // Pattern for Stage 2 IDs like "6-1"
+            // Pattern for Stage 2/3 IDs like "6-1" or "8-4"
             if (preg_match('/^\d+[\.-]\d+$/', trim($firstCellData['text'])) && count($cells) >= 3) {
                 $parsedRowQuestions = self::parseGridRow($cells);
                 foreach ($parsedRowQuestions as $q) {
@@ -53,10 +52,8 @@ class DocxParserService
                 continue;
             }
 
-            // Strategy 2: Block Mode (Cell = Question Block)
             foreach ($cells as $cell) {
                 $cellData = self::extractCellData($cell);
-                
                 if (self::isQuestionBlock($cellData['text'])) {
                     $parsedQuestion = self::parseQuestionBlock($cellData);
                     if ($parsedQuestion) {
@@ -71,22 +68,20 @@ class DocxParserService
     {
         $rowQuestions = [];
 
-        // Cell 1: Original MCQ with options A, B, C
+        // MCQ
         $mcqData = self::extractCellData($cells[1]);
         $mcq = self::parseQuestionBlock($mcqData);
         if ($mcq) $rowQuestions[] = $mcq;
 
-        // Cells 2+: Variations (usually True/False)
+        // T/F
         for ($i = 2; $i < count($cells) && $i < 5; $i++) {
             $varData = self::extractCellData($cells[$i]);
             $text = $varData['text'];
             
-            // Detection: Is it a True/False statement?
             if (stripos($text, 'True') !== false && stripos($text, 'False') !== false) {
                 $tf = self::parseTrueFalseFromCell($varData);
                 if ($tf) $rowQuestions[] = $tf;
             } else {
-                // Otherwise treat as a single block if relevant
                 $block = self::parseQuestionBlock($varData);
                 if ($block) $rowQuestions[] = $block;
             }
@@ -99,16 +94,28 @@ class DocxParserService
     {
         $text = $cellData['text'];
         $boldRanges = $cellData['bold_ranges'];
-
-        // Remove "TrueFalse" artifacts
-        $cleanText = preg_replace('/True\s*False$/i', '', $text);
-        $cleanText = self::cleanQuestionText($cleanText);
+        $cleanText = self::cleanQuestionText($text);
 
         if (empty($cleanText)) return null;
 
-        // Heuristic: If it has bold text, it's usually the correct variation (True)
-        // If it's not bold, it's usually the wrong variation (False)
-        $correctOption = empty($boldRanges) ? 1 : 0; // 0=YES(True), 1=NO(False)
+        $correctOption = 0; 
+        $foundExplicitBold = false;
+        foreach ($boldRanges as $range) {
+            $boldWord = trim(strtolower($range['text']));
+            if ($boldWord === 'true' || $boldWord === 'yes') {
+                $correctOption = 0;
+                $foundExplicitBold = true;
+                break;
+            } elseif ($boldWord === 'false' || $boldWord === 'no') {
+                $correctOption = 1;
+                $foundExplicitBold = true;
+                break;
+            }
+        }
+
+        if (!$foundExplicitBold) {
+             $correctOption = empty($boldRanges) ? 1 : 0;
+        }
 
         return [
             'question_text' => $cleanText,
@@ -121,16 +128,12 @@ class DocxParserService
 
     private static function cleanQuestionText(string $text): string
     {
-        $text = strip_tags($text);
-        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // Aggressive HTML cleaning
+        $text = self::stripHtmlArtifacts($text);
         
-        // Remove "Edit" prefix
+        $text = preg_replace('/True\s*False$/i', '', $text);
         $text = preg_replace('/^Edit\s+/i', '', $text);
-        
-        // Remove "Variation X:" prefix
         $text = preg_replace('/^Variation\s+\d+[:\s]*/i', '', $text);
-
-        // Remove ID prefix at start (e.g. "6-1.")
         $text = preg_replace('/^(?:Question\s+)?\d+(?:[\.-]\d+)?[\.:\)]\s*/i', '', $text);
         
         // Remove option letters dangling at the end
@@ -142,12 +145,22 @@ class DocxParserService
 
     private static function cleanOptionText(string $text): string
     {
-        $text = strip_tags($text);
-        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = self::stripHtmlArtifacts($text);
         $text = str_ireplace(['.TrueFalse', 'TrueFalse', 'True False'], '', $text);
         $text = preg_replace('/^[A-D\d][\.\)]\s*/', '', $text);
         $text = preg_replace('/\s+/', ' ', $text);
         return trim($text);
+    }
+
+    private static function stripHtmlArtifacts(string $text): string
+    {
+        // Handle common entity patterns
+        $text = str_ireplace(['&lt;u&gt;', '&lt;/u&gt;', '&lt;b&gt;', '&lt;/b&gt;', '&lt;i&gt;', '&lt;/i&gt;'], '', $text);
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = strip_tags($text);
+        // Second pass for nested entities
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        return $text;
     }
 
     private static function extractCellData(Cell $cell): array
@@ -166,7 +179,7 @@ class DocxParserService
                         $isBold = false;
                         if (method_exists($textElement, 'getFontStyle')) {
                             $style = $textElement->getFontStyle();
-                            if ($style->isBold()) $isBold = true;
+                            if ($style->isBold() || $style->getUnderline() !== 'none') $isBold = true;
                         }
 
                         if ($isBold) {
@@ -187,48 +200,45 @@ class DocxParserService
 
     private static function isQuestionBlock(string $text): bool
     {
-        // Must start with something like "1." or "6-1." or "Question"
+        $text = self::stripHtmlArtifacts($text);
         return preg_match('/^(?:Question\s+)?\d+(?:[\.-]\d+)?[\.:\)]/i', $text) || 
-               preg_match('/[A-D][\.\)]\s+.+/s', $text);
+               preg_match('/[A-D][\.\)]\s*.+/s', $text);
     }
 
     private static function parseQuestionBlock(array $cellData): ?array
     {
-        $text = $cellData['text'];
+        $rawText = $cellData['text'];
         $boldRanges = $cellData['bold_ranges'];
 
-        // Handle cases where options are concatenated on one line
-        if (strpos($text, "\n") === false && preg_match('/[A-D][\.\)]\s+/', $text)) {
-            $text = preg_replace('/([A-D][\.\)]\s+)/', "\n$1", $text);
-        }
-
-        $lines = explode("\n", $text);
+        // Clean HTML before splitting but preserve markers
+        $tempText = self::stripHtmlArtifacts($rawText);
+        
+        // Find option markers and force new lines
+        // Patterns: A. B) C. or even <u>B.</u>
+        // We look for [A-D] followed by . or )
+        $textWithNewlines = preg_replace('/([A-D][\.\)])/', "\n$1", $tempText);
+        $lines = explode("\n", $textWithNewlines);
+        
         $questionLines = [];
         $options = [];
-        
-        // Detection
-        $isTrueFalse = (stripos($text, 'True') !== false && stripos($text, 'False') !== false) &&
-                       !preg_match('/[A-D][\.\)]/', $text);
+        $isTrueFalse = (stripos($tempText, 'True') !== false && stripos($tempText, 'False') !== false) && !preg_match('/[A-D][\.\)]/', $tempText);
         
         $parsingOptions = false;
-        
         foreach ($lines as $line) {
             $line = trim($line);
             if (empty($line)) continue;
 
-            if (preg_match('/^([A-D])[)\.\]\s+(.+)/', $line, $matches)) {
+            if (preg_match('/^([A-D])[)\.\s]+(.+)/', $line, $matches)) {
                 $parsingOptions = true;
-                $isTrueFalse = false;
-                $options[] = ['text' => self::cleanOptionText($matches[2]), 'letter' => $matches[1], 'full_line' => $line];
+                $options[] = ['text' => $matches[2], 'letter' => $matches[1]];
             } elseif ($isTrueFalse && (stripos($line, 'True') === 0 || stripos($line, 'False') === 0)) {
                 $parsingOptions = true;
-                $options[] = ['text' => $line, 'letter' => null, 'full_line' => $line];
+                $options[] = ['text' => $line, 'letter' => null];
             } else {
                 if (!$parsingOptions) {
                     $questionLines[] = $line;
                 } else if (!empty($options)) {
-                    $idx = count($options) - 1;
-                    $options[$idx]['text'] .= ' ' . $line;
+                    $options[count($options) - 1]['text'] .= ' ' . $line;
                 }
             }
         }
@@ -240,13 +250,31 @@ class DocxParserService
 
         $correctIndex = 0;
         foreach ($options as $index => $opt) {
-            if (self::isOptionBold($opt['text'], $text, $boldRanges)) {
-                $correctIndex = $index;
-                break;
+            $letter = $opt['letter'];
+            $optClean = self::cleanOptionText($opt['text']);
+            
+            foreach ($boldRanges as $range) {
+                $rangeClean = trim(self::stripHtmlArtifacts($range['text']));
+                if (empty($rangeClean)) continue;
+                
+                // Strict check: if the bold text starts with the correct letter (e.g. "B.")
+                if ($letter && preg_match('/^' . $letter . '[\.\)\s]/i', $rangeClean)) {
+                    $correctIndex = $index;
+                    break 2;
+                }
+                
+                // Content check: if the bold text is exactly the option text (or contains it)
+                if (strlen($optClean) > 3 && (strpos($rangeClean, $optClean) !== false || strpos($optClean, $rangeClean) !== false)) {
+                     // Ensure it's not the question text
+                     if (stripos($questionText, $rangeClean) !== false && strlen($rangeClean) > 15) continue;
+                     
+                     $correctIndex = $index;
+                     break 2;
+                }
             }
         }
 
-        $finalOptions = array_map(function($o) { return $o['text']; }, $options);
+        $finalOptions = array_map(function($o) { return self::cleanOptionText($o['text']); }, $options);
         if ($isTrueFalse && empty($finalOptions)) $finalOptions = ['YES', 'NO'];
 
         return [
@@ -256,19 +284,5 @@ class DocxParserService
             'explanation' => '...',
             'type' => $isTrueFalse ? 'T_F' : 'choose'
         ];
-    }
-
-    private static function isOptionBold(string $optionText, string $fullText, array $boldRanges): bool
-    {
-        $pos = strpos($fullText, $optionText);
-        if ($pos === false) return false;
-        $end = $pos + strlen($optionText);
-        
-        foreach ($boldRanges as $range) {
-            $overlapStart = max($pos, $range['start']);
-            $overlapEnd = min($end, $range['end']);
-            if ($overlapStart < $overlapEnd) return true; 
-        }
-        return false;
     }
 }

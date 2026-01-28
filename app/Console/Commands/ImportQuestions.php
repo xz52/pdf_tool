@@ -190,9 +190,9 @@ class ImportQuestions extends Command
             '/Private.*Pilot/i' => 'Private Pilot',
             '/Commercial.*Pilot/i' => 'Commercial Pilot',
             '/Instrument.*Pilot/i' => 'Instrument Pilot',
-            '/Stage\s*(\d+)/i' => 'Stage $1',
-            '/PPL.*TEST.*GUIDE.*STAGE\s*(\d+)/i' => 'PPL Stage $1', // Custom for user request
-            '/PPL.*STAGE\s*(\d+)/i' => 'PPL Stage $1',
+            '/Stage\s*(\d+)/i' => 'STAGE $1',
+            '/PPL.*TEST.*GUIDE.*STAGE\s*(\d+)/i' => 'STAGE $1', 
+            '/PPL.*STAGE\s*(\d+)/i' => 'STAGE $1',
         ];
 
         foreach ($patterns as $pattern => $template) {
